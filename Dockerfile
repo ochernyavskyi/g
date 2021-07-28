@@ -1,9 +1,5 @@
-FROM python:3.7-alpine3.13
-
-RUN python3 -m ensurepip \
-    && pip3 install --no-cache --upgrade pip flask==2.0.0
-
-COPY app.py .
-
-ENTRYPOINT ["python3"]
-CMD ["app.py"]
+FROM php:7.4-cli
+COPY . /var/www/
+WORKDIR /var/www/
+CMD [ "php", "-S", "0.0.0.0:80"]
+EXPOSE 80
