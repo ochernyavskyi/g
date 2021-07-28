@@ -18,41 +18,43 @@ on:
       branches:
         - main
 
+  workflow_dispatch:
+
 
 jobs:
   ci-part:
     runs-on: ubuntu-latest
 
     steps:
+#
+#      - name: send custom message with args
+#        uses: appleboy/telegram-action@master
+#        with:
+#                to: ${{ secrets.TELEGRAM_TO }}
+#                token: ${{ secrets.TELEGRAM_TOKEN }}
+#                args: The ${{ github.event_name }} event triggered first step at CI.
+#
+#      - name: Git clone our repo
+#        uses: actions/checkout@v2
+#        with:
+#          # Full git history is needed to get a proper list of changed files within `super-linter`
+#          fetch-depth: 0
 
-      - name: send custom message with args
-        uses: appleboy/telegram-action@master
-        with:
-                to: ${{ secrets.TELEGRAM_TO }}
-                token: ${{ secrets.TELEGRAM_TOKEN }}
-                args: The ${{ github.event_name }} event triggered first step at CI.
-
-      - name: Git clone our repo
-        uses: actions/checkout@v2
-        with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
-
-      - name: Lint Code Base
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Lint Code Base
+#        uses: github/super-linter@v4
+#        env:
+#          VALIDATE_ALL_CODEBASE: false
+#          DEFAULT_BRANCH: main
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
-      - name: The job has failed
-        if: ${{ failure() }}
-        uses: appleboy/telegram-action@master
-        with:
-                to: ${{ secrets.TELEGRAM_TO }}
-                token: ${{ secrets.TELEGRAM_TOKEN }}
-                args: Ooops. There is an error during checking the code
+#      - name: The job has failed
+#        if: ${{ failure() }}
+#        uses: appleboy/telegram-action@master
+#        with:
+#                to: ${{ secrets.TELEGRAM_TO }}
+#                token: ${{ secrets.TELEGRAM_TOKEN }}
+#                args: Ooops. There is an error during checking the code
 
 
       - name: Create Zip deployment package
@@ -85,12 +87,12 @@ jobs:
 
     steps:
 
-      - name: send custom message with args
-        uses: appleboy/telegram-action@master
-        with:
-             to: ${{ secrets.TELEGRAM_TO }}
-             token: ${{ secrets.TELEGRAM_TOKEN }}
-             args: The ${{ github.event_name }} event triggered first step at CD.
+#      - name: send custom message with args
+#        uses: appleboy/telegram-action@master
+#        with:
+#             to: ${{ secrets.TELEGRAM_TO }}
+#             token: ${{ secrets.TELEGRAM_TOKEN }}
+#             args: The ${{ github.event_name }} event triggered first step at CD.
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
